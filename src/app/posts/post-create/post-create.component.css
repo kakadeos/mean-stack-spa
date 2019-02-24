@@ -1,21 +1,17 @@
-:host{
-  display: block;
-  margin-top: 1rem;
-}
 mat-form-field,
-textarea{
+textarea {
   width: 100%;
 }
 
 mat-spinner {
-   margin: auto;
+  margin: auto;
 }
 
 input[type="file"] {
   visibility: hidden;
 }
 
-.image-preview{
+.image-preview {
   height: 5rem;
   margin: 1rem 0;
 }
