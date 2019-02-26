@@ -8,28 +8,30 @@ const userRoutes = require('./routes/user')
 const app = express();
 
 mongoose.connect('mongodb+srv://omkar:3KIxeEOPfyt70mx0@cluster0-i1zah.mongodb.net/node-angular')
-.then(()=>{
-  console.log('Connected to DB');
-})
-.catch((err)=>{
-  console.log('Connection Fail'+err);
-});
+  .then(() => {
+    console.log('Connected to DB');
+  })
+  .catch((err) => {
+    console.log('Connection Fail' + err);
+  });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 app.use("/images", express.static(path.join("backend/images")));
 
-app.use((req, res, next)=>{
-  res.setHeader("Access-Control-Allow-Origin","*");
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers",
-  "Origin, X-Requested-with, Content-Type, Accept, Authorization");
-  res.setHeader("Access-Control-Allow-Methods","GET,POST,PUT,PATCH,DELETE,OPTIONS");
+    "Origin, X-Requested-with, Content-Type, Accept, Authorization");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
   next();
 });
 
-app.use("/api/posts",postsRoute);
-app.use("/api/users",userRoutes);
+app.use("/api/posts", postsRoute);
+app.use("/api/users", userRoutes);
 
 
 module.exports = app;
