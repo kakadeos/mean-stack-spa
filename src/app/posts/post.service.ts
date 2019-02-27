@@ -4,21 +4,21 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Post } from './post.model';
-import {environment } from '../../environments/environment'
+import {environment } from '../../environments/environment';
 
 const BACKEND_URL = environment.apiUrl + 'posts/';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
   private posts: Post[] = [];
-  private postsUpdated = new Subject<{posts:Post[], postCount:number}>();
+  private postsUpdated = new Subject<{posts: Post[], postCount: number}>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getPosts(postsPerPage:number, currentPage: number) {
-    const queryParams =`?pagesize=${postsPerPage}&page=${currentPage}`;
+  getPosts(postsPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
     this.http
-      .get<{ message: string; posts: any, maxPosts:number  }>(BACKEND_URL + queryParams)
+      .get<{ message: string; posts: any, maxPosts: number  }>(BACKEND_URL + queryParams)
       .pipe(
         map(postData => {
           return {posts: postData.posts.map(post => {
